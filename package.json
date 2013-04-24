@@ -1,0 +1,20 @@
+{
+	"name": "smartDb-redisCacheProvider",
+	"version": "0.0.1",
+	"description": "Cache provider for the smartDb library that uses Redis",
+	"url": "https://github.com/arnesten/smartDb",
+	"keywords": ["couchdb", "redis", "cache"],
+	"author": "Calle Arnesten <calle.arnesten@codekick.com>",
+	"main": "./lib/provider.js",
+	"dependencies": {
+		"redis": "*",
+		"underscore": "*"
+	},
+	"devDependencies": {
+		"buster": "*",
+		"buster-helpers": "https://github.com/arnesten/buster-helpers/archive/master.tar.gz"
+	},
+	"engines": {
+		"node": ">=0.8.0"
+	}
+}
