@@ -7,14 +7,19 @@
 	"author": "Calle Arnesten <calle.arnesten@codekick.com>",
 	"main": "./lib/provider.js",
 	"dependencies": {
+        "smartDb-standardCacheProviders": "https://github.com/arnesten/smartDb-standardCacheProviders/archive/master.tar.gz",
 		"redis": "*",
 		"underscore": "*"
 	},
 	"devDependencies": {
 		"buster": "*",
-		"buster-helpers": "https://github.com/arnesten/buster-helpers/archive/master.tar.gz"
+		"buster-helpers": "https://github.com/arnesten/buster-helpers/archive/master.tar.gz",
+        "sinon": "*"
 	},
 	"engines": {
 		"node": ">=0.8.0"
-	}
+	},
+    "scripts": {
+        "test": "node test/runAll.js"
+    }
 }
