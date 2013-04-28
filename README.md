@@ -1,4 +1,4 @@
-# smartdb-rediscacheProvider
+# smartdb-rediscacheprovider
 
 A Redis cache for [smartdb](https://github.com/arnesten/smartdb). Suitable if you have many Node.js processes that
 potentially makes updates to the same CouchDB documents.
