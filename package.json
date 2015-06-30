@@ -1,6 +1,6 @@
 {
 	"name": "smartdb-rediscacheprovider",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Cache provider for the smartdb library that uses Redis",
 	"keywords": ["smartdb", "redis", "cache", "couchdb"],
 	"author": "Calle Arnesten <calle.arnesten@codekick.com>",

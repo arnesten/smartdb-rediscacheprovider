@@ -21,6 +21,7 @@ The following options can be given when creating the cache provider:
 
 * `prefix` - The key prefix to use when saving in Redis. Default is *smartdb:*
 * `port` - The Redis port. Default is 6379.
+ * `hostname` - The Redis hostname. Default is 127.0.0.1.
 * `ageThreshold` - The threshold in milliseconds for cacheMaxAge in smartdb entity settings to when Redis should be used.
     If cacheMaxAge is below threshold it uses inMemoryCacheProvider instead. Default is 1000.
 * `inMemoryCacheMaxAge` - The max age in milliseconds when using the inMemoryCacheProvider. Default is the value of ageThreshold.
@@ -30,7 +31,7 @@ The following options can be given when creating the cache provider:
 
 (The MIT License)
 
-Copyright (c) 2013 Calle Arnesten
+Copyright (c) 2013-2015 Calle Arnesten
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
