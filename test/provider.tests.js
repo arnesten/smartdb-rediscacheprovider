@@ -1,18 +1,19 @@
-var _ = require('underscore');
-var buster = require('buster');
-var sinon = require('sinon');
-var testCase = buster.testCase;
-var assert = buster.assertions.assert;
-var refute = buster.assertions.refute;
-var redis = require('redis');
+'use strict';
+let bocha = require('bocha');
+let sinon = require('sinon');
+let testCase = bocha.testCase;
+let assert = bocha.assert;
+let refute = bocha.refute;
+let redis = require('redis');
+bocha.setDefaultTimeout(3000);
 
 module.exports = testCase('provider', {
     tearDown: function () {
-        if (redis.createClient.restore) redis.createClient.restore();
+        redis.createClient.restore && redis.createClient.restore();
     },
     'can get a value that was set': function (done) {
-        var provider = createProvider({});
-        var cache = provider.create('', { cacheMaxAge: 3000 });
+        let provider = createProvider({});
+        let cache = provider.create('', { cacheMaxAge: 3000 });
 
         cache.set('F1', { name: 'Shark' }, function (err) {
             refute(err);
@@ -44,8 +45,8 @@ module.exports = testCase('provider', {
         });
     },
     'can delete entry': function (done) {
-        var provider = createProvider({});
-        var cache = provider.create('', { cacheMaxAge: 3000 });
+        let provider = createProvider({});
+        let cache = provider.create('', { cacheMaxAge: 3000 });
 
         cache.set('F1', { name: 'Shark' }, function (err) {
             refute(err);
@@ -60,7 +61,7 @@ module.exports = testCase('provider', {
         });
     },
     'should use in-memory cache for recently set value': function (done) {
-        var fakeClient = {
+        let fakeClient = {
             get: sinon.stub().callsArg(1),
             setex: sinon.stub().callsArg(3)
         };
@@ -68,8 +69,8 @@ module.exports = testCase('provider', {
             return fakeClient;
         });
 
-        var provider = createProvider({});
-        var cache = provider.create('', { cacheMaxAge: 2000 });
+        let provider = createProvider({});
+        let cache = provider.create('', { cacheMaxAge: 2000 });
 
         cache.set('F1', { name: 'Shark' }, function (err) {
             refute(err);

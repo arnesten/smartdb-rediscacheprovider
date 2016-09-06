@@ -1,5 +1,6 @@
-var busterHelpers = require('buster-helpers');
+var bocha = require('bocha');
+bocha.setDefaultTimeout(3000);
 
-busterHelpers.runOnce(__dirname, {
+bocha.runOnce(__dirname, {
     fileSuffix: '.tests.js'
 });
