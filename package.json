@@ -11,9 +11,8 @@
   "author": "Calle Arnesten <calle.arnesten@codekick.com>",
   "main": "./lib/provider.js",
   "dependencies": {
-    "smartdb-stdcacheproviders": "^5.0.0",
     "redis": "^2.6.2",
-    "underscore": "*"
+    "smartdb-stdcacheproviders": "^5.0.0"
   },
   "devDependencies": {
     "bocha": "^1.5.4"
