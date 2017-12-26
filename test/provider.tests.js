@@ -1,87 +1,62 @@
-'use strict';
 let bocha = require('bocha');
-let sinon = require('sinon');
+let sinon = bocha.sinon;
 let testCase = bocha.testCase;
 let assert = bocha.assert;
 let refute = bocha.refute;
+let timeout = bocha.timeoutPromise;
 let redis = require('redis');
-bocha.setDefaultTimeout(3000);
 
 module.exports = testCase('provider', {
-    tearDown: function () {
+    tearDown() {
         redis.createClient.restore && redis.createClient.restore();
     },
-    'can get a value that was set': function (done) {
+    'can get a value that was set': async function () {
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
+        await cache.set('F1', { name: 'Shark' });
 
-        cache.set('F1', { name: 'Shark' }, function (err) {
-            refute(err);
-            cache.get('F1', function (err, doc) {
-                refute(err);
-                assert.equals(doc, { name: 'Shark' });
-                done();
-            })
-        });
+        let doc = await cache.get('F1');
+
+        assert.equals(doc, { name: 'Shark' });
     },
-    'cache should be invalidated after maxAge has passed': function (done) {
-        // NOTE: This test is a bit instable when running with autotest...
-        this.timeout = 3000;
-        var provider = createProvider({
+    'cache should be invalidated after maxAge has passed': async function () {
+        let provider = createProvider({
             ageThreshold: 100
         });
-        var cache = provider.create('', { cacheMaxAge: 1000 });
+        let cache = provider.create('', { cacheMaxAge: 1000 });
+        await cache.set('F1', { name: 'Shark' });
+        await timeout(2000);
 
-        cache.set('F1', { name: 'Shark' }, function (err) {
-            refute(err);
+        let doc = await cache.get('F1');
 
-            setTimeout(function () {
-                cache.get('F1', function (err, doc) {
-                    refute(err);
-                    refute(doc);
-                    done();
-                });
-            }, 2000);
-        });
+        refute(doc);
     },
-    'can delete entry': function (done) {
+    'can delete entry': async function () {
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
+        await cache.set('F1', { name: 'Shark' });
 
-        cache.set('F1', { name: 'Shark' }, function (err) {
-            refute(err);
-            cache.del('F1', function (err) {
-                refute(err);
-                cache.get('F1', function (err, doc) {
-                    refute(err);
-                    refute(doc);
-                    done();
-                })
-            })
-        });
+        await cache.del('F1');
+
+        let doc = await cache.get('F1');
+        refute(doc);
     },
-    'should use in-memory cache for recently set value': function (done) {
+    'should use in-memory cache for recently set value': async function () {
         let fakeClient = {
             get: sinon.stub().callsArg(1),
             setex: sinon.stub().callsArg(3)
         };
-        sinon.stub(redis, 'createClient', function () {
-            return fakeClient;
-        });
+        sinon.stub(redis, 'createClient', () => fakeClient);
 
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 2000 });
 
-        cache.set('F1', { name: 'Shark' }, function (err) {
-            refute(err);
+        await cache.set('F1', { name: 'Shark' });
 
-            cache.get('F1', function (err, doc) {
-                refute(err);
-                assert.equals(doc, { name: 'Shark'});
-                refute.called(fakeClient.get);
-                done();
-            });
-        });
+        let doc = await cache.get('F1');
+
+        assert.equals(doc, { name: 'Shark' });
+        refute.called(fakeClient.get);
     }
 });
 

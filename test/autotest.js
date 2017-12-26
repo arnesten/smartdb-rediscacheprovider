@@ -1,5 +1,5 @@
-var path = require('path');
-var bocha = require('bocha');
+let path = require('path');
+let bocha = require('bocha');
 bocha.setDefaultTimeout(3000);
 
 bocha.watch({

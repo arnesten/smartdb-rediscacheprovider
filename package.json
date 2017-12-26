@@ -1,28 +1,32 @@
 {
-	"name": "smartdb-rediscacheprovider",
-	"version": "1.2.0",
-	"description": "Cache provider for the smartdb library that uses Redis",
-	"keywords": ["smartdb", "redis", "cache", "couchdb"],
-	"author": "Calle Arnesten <calle.arnesten@codekick.com>",
-	"main": "./lib/provider.js",
-	"dependencies": {
-        "smartdb-stdcacheproviders": "^1.0.0",
-		"redis": "^2.6.2",
-		"underscore": "*"
-	},
-	"devDependencies": {
-		"bocha": "^1.0.1",
-        "sinon": "*"
-	},
-    "scripts": {
-        "test": "node test/runAll.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/arnesten/smartdb-rediscacheprovider"
-    },
-    "bugs": {
-        "url": "https://github.com/arnesten/smartdb-rediscacheprovider/issues"
-    },
-    "license": "MIT"
+  "name": "smartdb-rediscacheprovider",
+  "version": "1.2.0",
+  "description": "Cache provider for the smartdb library that uses Redis",
+  "keywords": [
+    "smartdb",
+    "redis",
+    "cache",
+    "couchdb"
+  ],
+  "author": "Calle Arnesten <calle.arnesten@codekick.com>",
+  "main": "./lib/provider.js",
+  "dependencies": {
+    "smartdb-stdcacheproviders": "^5.0.0",
+    "redis": "^2.6.2",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "bocha": "^1.5.4"
+  },
+  "scripts": {
+    "test": "node test/runAll.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arnesten/smartdb-rediscacheprovider"
+  },
+  "bugs": {
+    "url": "https://github.com/arnesten/smartdb-rediscacheprovider/issues"
+  },
+  "license": "MIT"
 }
