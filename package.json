@@ -11,7 +11,7 @@
   "author": "Calle Arnesten <calle.arnesten@codekick.com>",
   "main": "./lib/provider.js",
   "dependencies": {
-    "redis": "^2.8.0",
+    "redis": "^3.0.2",
     "smartdb-stdcacheproviders": "^6.2.0"
   },
   "devDependencies": {
