@@ -1,6 +1,10 @@
-var bocha = require('bocha');
-bocha.setDefaultTimeout(3000);
+import { setDefaultTimeout, runOnce } from 'bocha/node.mjs';
+import { URL } from 'url';
 
-bocha.runOnce(__dirname, {
+let __dirname = new URL('.', import.meta.url).pathname;
+
+setDefaultTimeout(3000);
+
+runOnce(__dirname, {
     fileSuffix: '.tests.js'
 });

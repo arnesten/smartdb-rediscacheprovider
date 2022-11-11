@@ -1,15 +1,8 @@
-let bocha = require('bocha');
-let sinon = bocha.sinon;
-let testCase = bocha.testCase;
-let assert = bocha.assert;
-let refute = bocha.refute;
-let timeout = bocha.timeoutPromise;
-let redis = require('redis');
+import { assert, refute, stub, testCase, timeout } from 'bocha/node.mjs';
+import redis from 'redis';
+import provider from '../lib/provider.js';
 
-module.exports = testCase('provider', {
-    tearDown() {
-        redis.createClient.restore && redis.createClient.restore();
-    },
+export default testCase('provider', {
     'can get a value that was set': async function () {
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
@@ -43,10 +36,10 @@ module.exports = testCase('provider', {
     },
     'should use in-memory cache for recently set value': async function () {
         let fakeClient = {
-            get: sinon.stub().callsArg(1),
-            setex: sinon.stub().callsArg(3)
+            get: stub().callsArg(1),
+            setex: stub().callsArg(3)
         };
-        sinon.stub(redis, 'createClient', () => fakeClient);
+        stub(redis, 'createClient', () => fakeClient);
 
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 2000 });
@@ -61,5 +54,5 @@ module.exports = testCase('provider', {
 });
 
 function createProvider(options) {
-    return require('../lib/provider.js')(options);
+    return provider(options);
 }

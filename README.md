@@ -6,10 +6,10 @@ potentially makes updates to the same CouchDB documents.
 ## Example
 
 ```javascript
-var smartdb = require('smartdb');
-var redisCacheProvider = require('smartdb-rediscacheprovider');
+import Smartdb from 'smartdb';
+import redisCacheProvider from 'smartdb-rediscacheprovider';
 
-var db = smartdb({
+var db = SmartDb({
     /* ... smartdb configuration ... */
     cacheProvider: redisCacheProvider({ /* options */  })
 });
@@ -31,7 +31,7 @@ The following options can be given when creating the cache provider:
 
 (The MIT License)
 
-Copyright (c) 2013-2016 Calle Arnesten
+Copyright (c) 2013-2022 Calle Arnesten
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
