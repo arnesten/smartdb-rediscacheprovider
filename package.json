@@ -13,7 +13,7 @@
   "main": "./lib/provider.js",
   "dependencies": {
     "redis": "^3.1.2",
-    "smartdb-stdcacheproviders": "^7.0.3"
+    "smartdb-stdcacheproviders": "^9.0.0"
   },
   "devDependencies": {
     "bocha": "^2.1.0"
