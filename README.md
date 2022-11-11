@@ -6,10 +6,10 @@ potentially makes updates to the same CouchDB documents.
 ## Example
 
 ```javascript
-import Smartdb from 'smartdb';
+import SmartDb from 'smartdb';
 import redisCacheProvider from 'smartdb-rediscacheprovider';
 
-var db = SmartDb({
+let db = SmartDb({
     /* ... smartdb configuration ... */
     cacheProvider: redisCacheProvider({ /* options */  })
 });
