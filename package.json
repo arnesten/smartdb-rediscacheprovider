@@ -12,11 +12,11 @@
   "type": "module",
   "main": "./lib/provider.js",
   "dependencies": {
-    "redis": "^3.1.2",
+    "@redis/client": "^1.5.11",
     "smartdb-stdcacheproviders": "^9.0.0"
   },
   "devDependencies": {
-    "bocha": "^2.1.0"
+    "bocha": "^4.2.1"
   },
   "scripts": {
     "test": "node test/runAll.js"

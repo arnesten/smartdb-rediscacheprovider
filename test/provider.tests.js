@@ -1,8 +1,19 @@
-import { assert, refute, stub, testCase, timeout } from 'bocha/node.mjs';
-import redis from 'redis';
+import { assert, refute, stub, testCase, timeout } from 'bocha';
+import redis from '@redis/client';
 import provider from '../lib/provider.js';
 
+let fakeClient;
+
 export default testCase('provider', {
+    setUp() {
+        fakeClient = {
+            async connect() {},
+            get: stub().resolves(),
+            setEx: stub().resolves(),
+            del: stub().resolves()
+        };
+        stub(redis, 'createClient', () => fakeClient);
+    },
     'can get a value that was set': async function () {
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
@@ -35,12 +46,6 @@ export default testCase('provider', {
         refute(doc);
     },
     'should use in-memory cache for recently set value': async function () {
-        let fakeClient = {
-            get: stub().callsArg(1),
-            setex: stub().callsArg(3)
-        };
-        stub(redis, 'createClient', () => fakeClient);
-
         let provider = createProvider({});
         let cache = provider.create('', { cacheMaxAge: 2000 });
 
