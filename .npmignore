@@ -1,6 +1,7 @@
 .gitignore
 .npmignore
 .idea
+.editorconfig
 test
 node_modules
 npm-debug.log
