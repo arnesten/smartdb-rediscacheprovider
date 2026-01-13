@@ -12,7 +12,7 @@
   "type": "module",
   "main": "./lib/provider.js",
   "dependencies": {
-    "@redis/client": "^1.5.11",
+    "@redis/client": "^5.10.0",
     "smartdb-stdcacheproviders": "^9.0.0"
   },
   "devDependencies": {

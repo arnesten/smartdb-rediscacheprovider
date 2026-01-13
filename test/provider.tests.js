@@ -7,6 +7,7 @@ let fakeClient;
 export default testCase('provider', {
     setUp() {
         fakeClient = {
+            on() {},
             async connect() {},
             get: stub().resolves(),
             setEx: stub().resolves(),
@@ -15,7 +16,7 @@ export default testCase('provider', {
         stub(redis, 'createClient', () => fakeClient);
     },
     'can get a value that was set': async function () {
-        let provider = createProvider({});
+        let provider = await createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
         await cache.set('F1', { name: 'Shark' });
 
@@ -24,7 +25,7 @@ export default testCase('provider', {
         assert.equals(doc, { name: 'Shark' });
     },
     'cache should be invalidated after maxAge has passed': async function () {
-        let provider = createProvider({
+        let provider = await createProvider({
             ageThreshold: 100
         });
         let cache = provider.create('', { cacheMaxAge: 1000 });
@@ -36,7 +37,7 @@ export default testCase('provider', {
         refute(doc);
     },
     'can delete entry': async function () {
-        let provider = createProvider({});
+        let provider = await createProvider({});
         let cache = provider.create('', { cacheMaxAge: 3000 });
         await cache.set('F1', { name: 'Shark' });
 
@@ -46,7 +47,7 @@ export default testCase('provider', {
         refute(doc);
     },
     'should use in-memory cache for recently set value': async function () {
-        let provider = createProvider({});
+        let provider = await createProvider({});
         let cache = provider.create('', { cacheMaxAge: 2000 });
 
         await cache.set('F1', { name: 'Shark' });
