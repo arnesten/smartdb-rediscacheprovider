@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/arnesten/smartdb-rediscacheprovider"
+    "url": "git+https://github.com/arnesten/smartdb-rediscacheprovider.git"
   },
   "bugs": {
     "url": "https://github.com/arnesten/smartdb-rediscacheprovider/issues"
